@@ -1,0 +1,173 @@
+CREATE DATABASE helpdesksystem
+
+
+CREATE TABLE login_hds
+(
+    IdUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_real_usuario_login VARCHAR(50) NOT NULL,
+    usuario_login VARCHAR(50) NOT NULL,
+    password_login VARCHAR(50) NOT NULL
+);
+
+INSERT INTO `login_hds`(`nombre_real_usuario_login`, `usuario_login`, `password_login`) 
+VALUES ('Usuario','user','123');
+
+INSERT INTO `login_hds`(`nombre_real_usuario_login`, `usuario_login`, `password_login`) 
+VALUES ('Administrador','admin','123');
+
+
+
+
+
+create table empleados_solucion_hds
+(
+    IdEmpleado int primary key not null AUTO_INCREMENT,
+    nombre_empleado varchar(50) not null,
+    dpi_empleado int not null,
+    direccion_empleado varchar(80) not null,
+    telefono_empleado int,
+    area_experta varchar(50)
+);
+
+INSERT INTO `empleados_solucion_hds`(`nombre_empleado`, `dpi_empleado`, `direccion_empleado`, `telefono_empleado`, `area_experta`) 
+VALUES ('Daniel - Programacion','3050011145226','Ciudad de Guatemala','48754545','Programación');
+
+INSERT INTO `empleados_solucion_hds`(`nombre_empleado`, `dpi_empleado`, `direccion_empleado`, `telefono_empleado`, `area_experta`) 
+VALUES ('José - Software','451245454587','Ciudad de Guatemala','45777796','Software');
+
+INSERT INTO `empleados_solucion_hds`(`nombre_empleado`, `dpi_empleado`, `direccion_empleado`, `telefono_empleado`, `area_experta`) 
+VALUES ('Estuardo - Software','4512448799666','Asunción Mita Jutiapa','66314574','Software');
+
+INSERT INTO `empleados_solucion_hds`(`nombre_empleado`, `dpi_empleado`, `direccion_empleado`, `telefono_empleado`, `area_experta`)  
+VALUES ('Lesly - Hardware','4512448799666','Nueva Santa Rosa Santa Rosa','58375698','Hardware');
+
+
+
+
+create table empresa_hds
+(
+	IdEmpresa int primary key NOT NULL AUTO_INCREMENT,
+    nit_empresa int not null,
+    nombre_empresa varchar(50) not null,
+    direccion_empresa varchar(80) not null,
+    tipo_servicio_empresa varchar(50)
+);
+
+INSERT INTO `empresa_hds`(`nit_empresa`, `nombre_empresa`, `direccion_empresa`, `tipo_servicio_empresa`)
+VALUES (142558745,'BalamXCode - Programacion','Guatemala','Programación');
+
+INSERT INTO `empresa_hds`(`nit_empresa`, `nombre_empresa`, `direccion_empresa`, `tipo_servicio_empresa`)
+VALUES (45454578,'SuperSupport - Software','Finlandia','Soporte de Software');
+
+INSERT INTO `empresa_hds`(`nit_empresa`, `nombre_empresa`, `direccion_empresa`, `tipo_servicio_empresa`)
+VALUES (12454885,'Tatos Solutions - Hardware','Guatemala','Soporte de Hardware');
+
+INSERT INTO `empresa_hds`(`nit_empresa`, `nombre_empresa`, `direccion_empresa`, `tipo_servicio_empresa`)
+VALUES (454885645,'GuanacosConnect - Redes','El Salvador','Soluciones de Redes');
+
+
+
+
+
+create table catalogo_software_hds(
+	IdIncidenciaSoftware int primary key not null auto_increment,
+    nombreIncidencia_software varchar(50),
+    descripcionIncidencia_software varchar(250),
+    dañoIncidencia_software varchar(50)
+);
+
+INSERT into catalogo_software_hds(nombreIncidencia_software,descripcionIncidencia_software,dañoIncidencia_software)
+VALUES('NO TENGO INCIDENCIA DE SOFTWARE', 'NULL', 'NULL');
+
+INSERT into catalogo_software_hds(nombreIncidencia_software,descripcionIncidencia_software,dañoIncidencia_software)
+VALUES('Word se Traba', 'El word se traba y cierra la aplicación despues de unos minutos', 'Tiempo');
+
+INSERT into catalogo_software_hds(nombreIncidencia_software,descripcionIncidencia_software,dañoIncidencia_software)
+VALUES('Offimatica (Word, Excel, Etc) no responde', 'Cualquier de las apps se traba y cierra la aplicación despues de unos minutos', 
+'Tiempo');
+
+INSERT into catalogo_software_hds(nombreIncidencia_software,descripcionIncidencia_software,dañoIncidencia_software)
+VALUES('La computadora está lenta', 'Puede que la computadora esté llena de archivos basuras o de aplicaciones', 'Tiempo');
+
+INSERT into catalogo_software_hds(nombreIncidencia_software,descripcionIncidencia_software,dañoIncidencia_software)
+VALUES('Windows tarda en iniciar', 'El inicio de windows es demasiado lento', 'Tiempo');
+
+INSERT into catalogo_software_hds(nombreIncidencia_software,descripcionIncidencia_software,dañoIncidencia_software)
+VALUES('Me salen muchas ventanas de publicidad en el navegador', 
+'Sale demasiada publicidad en el navegador, por lo que es muy molesto estar eliminando publicidad', 'Tiempo');
+
+
+
+
+
+create table catalogo_hardware_hds(
+	IdIncidenciaHardware int primary key not null auto_increment,
+    nombreIncidencia_hardware varchar(50),
+    descripcionIncidencia_hardware varchar(250),
+    dañoIncidencia_hardware varchar(50)
+);
+
+INSERT INTO `catalogo_hardware_hds`(`nombreIncidencia_hardware`, `descripcionIncidencia_hardware`, `dañoIncidencia_hardware`) 
+VALUES ('NO TENGO INCIDENCIA DE HARDWARE', 'NULL', 'NULL');
+
+INSERT INTO `catalogo_hardware_hds`(`nombreIncidencia_hardware`, `descripcionIncidencia_hardware`, `dañoIncidencia_hardware`) 
+VALUES ('La computadora hace un ruido extraño como un helicóptero',
+'La computadora tiene un ruido extraño cuando está encendida','Fuente de Poder');
+
+INSERT INTO `catalogo_hardware_hds`(`nombreIncidencia_hardware`, `descripcionIncidencia_hardware`, `dañoIncidencia_hardware`) 
+VALUES ('El monitor tiene rallas o no enciende',
+'La computadora suena encendida pero no muestra pantalla o tiene rayas','Tarjeta Gráfica / Monitor');
+
+INSERT INTO `catalogo_hardware_hds`(`nombreIncidencia_hardware`, `descripcionIncidencia_hardware`, `dañoIncidencia_hardware`) 
+VALUES ('Al encender, me pide una clave en una pantalla azul o negra',
+'Cuando enciendo mi computadora, da un error en una pantalla azul o negra dónde me pide una clave de BIOS','Clave de la BIOS');
+
+
+
+
+create table ticket_creado_incidencia_hds
+(
+    IdTicket int primary key not null auto_increment,
+    IdEmpresa_incidencia int,
+    IdEmpleado_incidencia int,
+    IdIncidenciasSoftware_incidencia int,
+    IdIncidenciasHardware_incidencia int,
+    nombre_usuario_solicita varchar(50),
+    fechaCreacion_incidencia varchar(50),
+    prioridad_incidencia varchar(50),
+    asunto_incidencia varchar(50),
+    descripcionProblema_incidencia varchar(50),
+    estado_incidencia varchar(10),
+    FOREIGN KEY (IdEmpresa_incidencia) REFERENCES empresa_hds(IdEmpresa),
+    FOREIGN KEY (IdEmpleado_incidencia) REFERENCES empleados_solucion_hds(IdEmpleado),
+    FOREIGN KEY (IdIncidenciasSoftware_incidencia) REFERENCES catalogo_software_hds(IdIncidenciaSoftware),
+    FOREIGN KEY (IdIncidenciasHardware_incidencia) REFERENCES catalogo_hardware_hds(IdIncidenciaHardware)
+);
+
+
+
+create table ticket_atendido_incidencia_hds
+(
+	IdTicketAtendido int primary key not null AUTO_INCREMENT,
+    IdTicket_incidencia int,
+    IdEmpleadoAsignado_incidencia int,
+    solucion_incidencia varchar(250),
+    tiempoSolucion varchar(50),
+    fechaSolucion_incidencia varchar(50),
+    observaciones_incidencia varchar(250),
+    estado_incidencia varchar(15),
+    FOREIGN KEY (IdTicket_incidencia) REFERENCES ticket_creado_incidencia_hds(IdTicket),
+    FOREIGN KEY (IdEmpleadoAsignado_incidencia) REFERENCES empleados_solucion_hds(IdEmpleado)
+);
+
+
+
+
+
+
+
+
+
+
+
+
